@@ -1,10 +1,12 @@
-name: Telegram Test
+name: Naukri Telegram Job Bot
 
 on:
+  schedule:
+    - cron: "*/30 * * * *"
   workflow_dispatch:
 
 jobs:
-  test:
+  run-bot:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,10 +20,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install requests
+          pip install requests beautifulsoup4
 
-      - name: Run Telegram test
-        run: python telegram_test.py
+      - name: Run job tracker
+        run: python job_tracker.py
         env:
           TG_BOT_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
